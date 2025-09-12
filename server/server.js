@@ -1,11 +1,15 @@
 import 'dotenv/config'
 
 import express from 'express'
+import loggerMiddleware from './middleware/logger.js'
+
 const app = express()
+app.use(loggerMiddleware)
 
 app.get('/', (req, res)=>{
     res.send("server is live!")
 })
+
 
 const PORT = process.env.PORT || 3000
 app.listen( PORT, ()=>{
