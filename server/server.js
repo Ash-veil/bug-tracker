@@ -4,6 +4,8 @@ import "dotenv/config";
 import express from "express";
 const app = express();
 
+app.use(express.urlencoded({ extended: false }));
+
 //db_configs
 import { sequelize, User, Project } from "./configs/database.js";
 (async () => {
@@ -26,6 +28,10 @@ app.use(loggerMiddleware);
 app.get("/", (req, res) => {
   res.send("server is live!");
 });
+
+//api_routes
+import authRoutes from "./route/authentication.js"
+app.use(authRoutes)
 
 //server_start
 const PORT = process.env.PORT || 3000;
